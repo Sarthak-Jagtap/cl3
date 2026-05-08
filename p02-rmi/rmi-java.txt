@@ -1,0 +1,181 @@
+# 1. Remote Interface (`ConcatInterface.java`)
+
+```java id="bq6g3r"
+import java.rmi.Remote;
+import java.rmi.RemoteException;
+
+public interface ConcatInterface extends Remote
+{
+    String concatenate(String str1, String str2)
+            throws RemoteException;
+}
+```
+
+---
+
+# 2. Server Implementation (`ConcatImpl.java`)
+
+```java id="9j3m1x"
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
+
+public class ConcatImpl extends UnicastRemoteObject
+        implements ConcatInterface
+{
+
+    protected ConcatImpl() throws RemoteException
+    {
+        super();
+    }
+
+    @Override
+    public String concatenate(String str1, String str2)
+            throws RemoteException
+    {
+        return str1 + str2;
+    }
+}
+```
+
+---
+
+# 3. Server Program (`Server.java`)
+
+```java id="2x7t0m"
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
+
+public class Server
+{
+    public static void main(String[] args)
+    {
+        try
+        {
+            // Create remote object
+            ConcatImpl obj = new ConcatImpl();
+
+            // Create registry at port 1099
+            Registry registry =
+                    LocateRegistry.createRegistry(1099);
+
+            // Bind object with name
+            registry.rebind("ConcatService", obj);
+
+            System.out.println("Server is running...");
+        }
+        catch(Exception e)
+        {
+            System.out.println("Server Error: " + e);
+        }
+    }
+}
+```
+
+---
+
+# 4. Client Program (`Client.java`)
+
+```java id="u0w8p4"
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
+import java.util.Scanner;
+
+public class Client
+{
+    public static void main(String[] args)
+    {
+        try
+        {
+            // Connect to registry
+            Registry registry =
+                    LocateRegistry.getRegistry("localhost", 1099);
+
+            // Lookup remote object
+            ConcatInterface obj =
+                    (ConcatInterface) registry.lookup("ConcatService");
+
+            Scanner sc = new Scanner(System.in);
+
+            // Input strings
+            System.out.print("Enter first string: ");
+            String str1 = sc.nextLine();
+
+            System.out.print("Enter second string: ");
+            String str2 = sc.nextLine();
+
+            // Remote method call
+            String result = obj.concatenate(str1, str2);
+
+            // Display result
+            System.out.println("\nConcatenated String: " + result);
+        }
+        catch(Exception e)
+        {
+            System.out.println("Client Error: " + e);
+        }
+    }
+}
+```
+
+---
+
+# Steps to Run the Program
+
+---
+
+# Step 1: Compile All Files
+
+```bash id="jflv80"
+javac *.java
+```
+
+---
+
+# Step 2: Start Server
+
+```bash id="jlwm7w"
+java Server
+```
+
+Output:
+
+```plaintext id="1hfxn9"
+Server is running...
+```
+
+---
+
+# Step 3: Run Client
+
+Open another terminal:
+
+```bash id="o3g7k2"
+java Client
+```
+
+---
+
+# Example Output
+
+```plaintext id="jlwm2z"
+Enter first string: Hello
+Enter second string: World
+
+Concatenated String: HelloWorld
+```
+
+---
+
+# Concept Used
+
+This program uses:
+
+* Java RMI
+* Client-Server Architecture
+* Remote Method Invocation
+
+where:
+
+* client remotely calls `concatenate()`
+* server performs string concatenation
+* result is returned over network.
