@@ -1,0 +1,481 @@
+✅ PRACTICAL 6 — Clonal Selection Algorithm (CSA)
+
+📄 Topic:
+Implementation of Clonal Selection Algorithm using Python.
+
+====================================================================================================
+
+1. ✅ How to Run in Short
+
+🔹 Step 1 — Open terminal in project folder
+
+cd path_to_folder
+
+Reason:
+To access Python file from terminal.
+
+--------------------------------------------------
+
+🔹 Step 2 — Run Python file
+
+python clonal_selection.py
+
+Reason:
+Executes Clonal Selection Algorithm optimization process.
+
+--------------------------------------------------
+
+🔹 Step 3 — Observe output
+
+Reason:
+Displays best solution and fitness value generation by generation.
+
+====================================================================================================
+
+2. ✅ Reason for the Code (Why Each Important Line is Written)
+
+🔹 IMPORT RANDOM MODULE
+
+Line:
+import random
+
+Reason:
+Used for random population generation and mutation.
+
+--------------------------------------------------
+
+🔹 FITNESS FUNCTION
+
+Line:
+def fitness(x):
+
+Reason:
+Evaluates quality of candidate solution.
+
+--------------------------------------------------
+
+Line:
+return x ** 2
+
+Reason:
+Fitness function to maximize solution quality.
+
+--------------------------------------------------
+
+🔹 INITIALIZE POPULATION
+
+Line:
+random.uniform(-10, 10)
+
+Reason:
+Generates random antibodies (solutions).
+
+--------------------------------------------------
+
+🔹 CLONE FUNCTION
+
+Line:
+clone(population, clone_factor=2)
+
+Reason:
+Creates copies of best antibodies.
+
+--------------------------------------------------
+
+🔹 MUTATION FUNCTION
+
+Line:
+c += random.uniform(-1, 1)
+
+Reason:
+Introduces variation in cloned antibodies.
+
+--------------------------------------------------
+
+🔹 SELECTION FUNCTION
+
+Line:
+sorted(population, key=lambda x: fitness(x), reverse=True)
+
+Reason:
+Sorts solutions according to fitness.
+
+--------------------------------------------------
+
+🔹 GENERATION LOOP
+
+Line:
+for gen in range(generations):
+
+Reason:
+Runs optimization process repeatedly.
+
+--------------------------------------------------
+
+🔹 COMBINE POPULATION
+
+Line:
+population = population + mutated
+
+Reason:
+Combines original and mutated solutions.
+
+====================================================================================================
+
+3. ✅ Viva Questions with Short Answers
+
+Q1. What is Clonal Selection Algorithm?
+CSA is a bio-inspired optimization algorithm based on immune system behavior.
+
+--------------------------------------------------
+
+Q2. What is affinity in CSA?
+Affinity represents quality or fitness of a solution.
+
+--------------------------------------------------
+
+Q3. What is cloning in CSA?
+Replication of best candidate solutions.
+
+--------------------------------------------------
+
+Q4. What is mutation?
+Random modification of cloned solutions.
+
+--------------------------------------------------
+
+Q5. Why mutation is important?
+Introduces diversity and improves exploration.
+
+--------------------------------------------------
+
+Q6. What is antibody in CSA?
+Candidate solution of optimization problem.
+
+--------------------------------------------------
+
+Q7. What is antigen in CSA?
+Problem or objective function.
+
+--------------------------------------------------
+
+Q8. What is fitness function?
+Function used to evaluate solution quality.
+
+--------------------------------------------------
+
+Q9. Advantages of CSA?
+Fast optimization and good exploration ability.
+
+--------------------------------------------------
+
+Q10. Applications of CSA?
+Optimization, machine learning, robotics, scheduling.
+
+====================================================================================================
+
+4. ✅ Practical Explanation in Detail
+
+🔹 Introduction
+
+This practical demonstrates implementation of Clonal Selection Algorithm (CSA), a bio-inspired optimization algorithm based on the human immune system.
+
+The algorithm searches for best solution using:
+- Cloning
+- Mutation
+- Selection
+
+--------------------------------------------------
+
+🔹 Biological Inspiration
+
+CSA is inspired by behavior of B-cells in immune system.
+
+In biological immune system:
+- Antibodies detect antigens
+- Best antibodies are cloned
+- Clones mutate for improvement
+- Strongest antibodies survive
+
+--------------------------------------------------
+
+🔹 Mapping in CSA
+
+Biological Term          Computational Term
+
+Antibody              → Candidate Solution
+Antigen               → Optimization Problem
+Affinity              → Fitness Value
+Cloning               → Replication
+Mutation              → Random Variation
+
+--------------------------------------------------
+
+🔹 Objective of Practical
+
+The objective is to maximize fitness function:
+
+f(x) = x²
+
+The algorithm searches for value of x producing highest fitness.
+
+--------------------------------------------------
+
+🔹 Working Principle
+
+1. Generate random population
+2. Evaluate fitness
+3. Select best solutions
+4. Clone best solutions
+5. Mutate cloned solutions
+6. Combine populations
+7. Select best again
+8. Repeat for generations
+
+--------------------------------------------------
+
+🔹 Population Initialization
+
+Random solutions are generated between:
+-10 and 10
+
+These represent antibodies.
+
+--------------------------------------------------
+
+🔹 Fitness Evaluation
+
+Fitness determines quality of solution.
+
+Higher fitness means better antibody.
+
+--------------------------------------------------
+
+🔹 Cloning Process
+
+Best antibodies are copied multiple times.
+
+Higher fitness → more cloning.
+
+--------------------------------------------------
+
+🔹 Mutation Process
+
+Random changes are introduced in clones.
+
+This:
+- increases diversity
+- explores new solutions
+- avoids local optimum
+
+--------------------------------------------------
+
+🔹 Selection Process
+
+Best solutions are selected based on fitness.
+
+Weak solutions are discarded.
+
+--------------------------------------------------
+
+🔹 Generations
+
+Optimization repeats for multiple generations to improve results.
+
+--------------------------------------------------
+
+🔹 Advantages of CSA
+
+- Good optimization capability
+- Fast convergence
+- Handles complex problems
+- Avoids local optimum
+
+--------------------------------------------------
+
+🔹 Applications
+
+- Artificial Intelligence
+- Robotics
+- Scheduling
+- Pattern Recognition
+- Machine Learning
+
+====================================================================================================
+
+5. ✅ Algorithm (Detailed)
+
+🔹 Step 1:
+Start the algorithm.
+
+--------------------------------------------------
+
+🔹 Step 2:
+Generate initial population of antibodies randomly.
+
+--------------------------------------------------
+
+🔹 Step 3:
+Evaluate fitness of each antibody using fitness function.
+
+--------------------------------------------------
+
+🔹 Step 4:
+Select antibodies having highest fitness values.
+
+--------------------------------------------------
+
+🔹 Step 5:
+Clone selected antibodies proportionally to their fitness.
+
+--------------------------------------------------
+
+🔹 Step 6:
+Apply mutation to cloned antibodies.
+
+--------------------------------------------------
+
+🔹 Step 7:
+Evaluate fitness of mutated antibodies.
+
+--------------------------------------------------
+
+🔹 Step 8:
+Combine original and mutated populations.
+
+--------------------------------------------------
+
+🔹 Step 9:
+Select best antibodies for next generation.
+
+--------------------------------------------------
+
+🔹 Step 10:
+Repeat Steps 4–9 until stopping condition is reached.
+
+--------------------------------------------------
+
+🔹 Step 11:
+Display best solution obtained.
+
+====================================================================================================
+
+6. ✅ Code Explanation
+
+🔹 IMPORT MODULE
+
+import random
+
+Used for random number generation.
+
+--------------------------------------------------
+
+🔹 FITNESS FUNCTION
+
+def fitness(x):
+
+Calculates quality of solution.
+
+--------------------------------------------------
+
+Line:
+return x ** 2
+
+Computes fitness value.
+
+--------------------------------------------------
+
+🔹 INITIALIZE POPULATION
+
+def initialize_population(size):
+
+Generates random antibodies.
+
+--------------------------------------------------
+
+Line:
+random.uniform(-10, 10)
+
+Creates random solution values.
+
+--------------------------------------------------
+
+🔹 CLONE FUNCTION
+
+def clone(population, clone_factor=2):
+
+Copies best antibodies.
+
+--------------------------------------------------
+
+Line:
+clones.append(individual)
+
+Adds clone into population.
+
+--------------------------------------------------
+
+🔹 MUTATION FUNCTION
+
+def mutate(clones, mutation_rate=0.1):
+
+Introduces random changes.
+
+--------------------------------------------------
+
+Line:
+c += random.uniform(-1, 1)
+
+Performs mutation.
+
+--------------------------------------------------
+
+🔹 SELECTION FUNCTION
+
+def select(population, size):
+
+Selects best antibodies.
+
+--------------------------------------------------
+
+Line:
+sorted(... reverse=True)
+
+Sorts population in descending order.
+
+--------------------------------------------------
+
+🔹 CLONAL SELECTION FUNCTION
+
+def clonal_selection(...)
+
+Controls complete optimization process.
+
+--------------------------------------------------
+
+Line:
+for gen in range(generations):
+
+Runs multiple generations.
+
+--------------------------------------------------
+
+🔹 COMBINATION STEP
+
+population = population + mutated
+
+Combines old and mutated antibodies.
+
+--------------------------------------------------
+
+🔹 MAIN PROGRAM
+
+best = clonal_selection()
+
+Executes algorithm and prints result.
+
+====================================================================================================
+
+✅ FINAL CONCLUSION
+
+In this practical, we successfully implemented the Clonal Selection Algorithm using Python. The algorithm optimized candidate solutions using cloning, mutation, and selection inspired by the biological immune system.
