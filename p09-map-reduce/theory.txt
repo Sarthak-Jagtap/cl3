@@ -1,0 +1,495 @@
+✅ PRACTICAL 9 — MapReduce Weather Analysis
+
+📄 Topic:
+Implementation of MapReduce to find hottest and coolest year from weather dataset.
+
+====================================================================================================
+
+1. ✅ How to Run in Short
+
+🔹 Step 1 — Open terminal in project folder
+
+cd path_to_folder
+
+Reason:
+To access Python and dataset files.
+
+--------------------------------------------------
+
+🔹 Step 2 — Run Python file
+
+python mapreduce_weather.py
+
+Reason:
+Executes MapReduce simulation for weather analysis.
+
+--------------------------------------------------
+
+🔹 Step 3 — Observe output
+
+Reason:
+Displays average temperature, hottest year, and coolest year.
+
+====================================================================================================
+
+2. ✅ Reason for the Code (Why Each Important Line is Written)
+
+🔹 MAP FUNCTION
+
+Line:
+def mapper(line):
+
+Reason:
+Processes one line of dataset.
+
+--------------------------------------------------
+
+Line:
+line.strip().split(",")
+
+Reason:
+Separates year and temperature values.
+
+--------------------------------------------------
+
+Line:
+return int(year), float(temp)
+
+Reason:
+Returns key-value pair for MapReduce.
+
+--------------------------------------------------
+
+🔹 REDUCE FUNCTION
+
+Line:
+def reducer(mapped_data):
+
+Reason:
+Groups mapped values by year.
+
+--------------------------------------------------
+
+Line:
+if year not in data:
+
+Reason:
+Creates new list for each year.
+
+--------------------------------------------------
+
+Line:
+data[year].append(temp)
+
+Reason:
+Stores temperatures year-wise.
+
+--------------------------------------------------
+
+Line:
+sum(data[year]) / len(data[year])
+
+Reason:
+Calculates average temperature.
+
+--------------------------------------------------
+
+🔹 FILE READING
+
+Line:
+with open("weather.txt", "r")
+
+Reason:
+Reads dataset file.
+
+--------------------------------------------------
+
+🔹 MAP PHASE
+
+Line:
+mapped = [mapper(line) for line in lines]
+
+Reason:
+Executes mapper for all records.
+
+--------------------------------------------------
+
+🔹 REDUCE PHASE
+
+Line:
+reduced = reducer(mapped)
+
+Reason:
+Performs aggregation and averaging.
+
+--------------------------------------------------
+
+🔹 HOTTEST YEAR
+
+Line:
+max(reduced, key=reduced.get)
+
+Reason:
+Finds highest average temperature.
+
+--------------------------------------------------
+
+🔹 COOLEST YEAR
+
+Line:
+min(reduced, key=reduced.get)
+
+Reason:
+Finds lowest average temperature.
+
+====================================================================================================
+
+3. ✅ Viva Questions with Short Answers
+
+Q1. What is MapReduce?
+Programming model for processing large datasets.
+
+--------------------------------------------------
+
+Q2. What is Mapper?
+Component that processes input data into key-value pairs.
+
+--------------------------------------------------
+
+Q3. What is Reducer?
+Component that aggregates mapped data.
+
+--------------------------------------------------
+
+Q4. What is Hadoop?
+Framework for distributed big data processing.
+
+--------------------------------------------------
+
+Q5. Why MapReduce is used?
+To process large-scale data efficiently.
+
+--------------------------------------------------
+
+Q6. What is key-value pair?
+Data format used in MapReduce processing.
+
+--------------------------------------------------
+
+Q7. What is distributed computing?
+Processing data across multiple systems.
+
+--------------------------------------------------
+
+Q8. Difference between Mapper and Reducer?
+Mapper transforms data, Reducer aggregates data.
+
+--------------------------------------------------
+
+Q9. What is Big Data?
+Extremely large datasets requiring distributed processing.
+
+--------------------------------------------------
+
+Q10. Applications of MapReduce?
+Weather analysis, search engines, log analysis.
+
+====================================================================================================
+
+4. ✅ Practical Explanation in Detail
+
+🔹 Introduction
+
+This practical demonstrates implementation of MapReduce for weather data analysis.
+
+The objective is to:
+- Calculate average yearly temperature
+- Find hottest year
+- Find coolest year
+
+--------------------------------------------------
+
+🔹 MapReduce Concept
+
+MapReduce is a programming model used in distributed systems for processing large datasets.
+
+It works in two major phases:
+1. Map Phase
+2. Reduce Phase
+
+--------------------------------------------------
+
+🔹 Map Phase
+
+The Mapper:
+- Reads input data
+- Converts data into key-value pairs
+
+Example:
+
+Input:
+2010,30
+
+Output:
+(2010, 30)
+
+--------------------------------------------------
+
+🔹 Reduce Phase
+
+Reducer:
+- Groups values by key
+- Performs aggregation
+
+Example:
+
+(2010, [30,32])
+
+Average:
+31
+
+--------------------------------------------------
+
+🔹 Weather Dataset
+
+Dataset contains:
+- Year
+- Temperature
+
+Example:
+
+2010,30
+2010,32
+
+--------------------------------------------------
+
+🔹 Average Temperature Calculation
+
+Formula:
+
+Average = Sum of temperatures / Number of records
+
+--------------------------------------------------
+
+🔹 Hottest and Coolest Year
+
+After calculating averages:
+- Maximum average → Hottest year
+- Minimum average → Coolest year
+
+--------------------------------------------------
+
+🔹 Advantages of MapReduce
+
+- Handles large data
+- Supports distributed computing
+- Parallel processing
+- Fault tolerance
+
+--------------------------------------------------
+
+🔹 Hadoop Framework
+
+Hadoop uses MapReduce internally.
+
+Components:
+- HDFS
+- MapReduce Engine
+- YARN
+
+--------------------------------------------------
+
+🔹 Applications
+
+- Weather forecasting
+- Search engines
+- Social media analysis
+- Data mining
+- Log processing
+
+====================================================================================================
+
+5. ✅ Algorithm (Detailed)
+
+🔹 Step 1:
+Start the program.
+
+--------------------------------------------------
+
+🔹 Step 2:
+Read weather dataset from text file.
+
+--------------------------------------------------
+
+🔹 Step 3:
+Pass each line to Mapper function.
+
+--------------------------------------------------
+
+🔹 Step 4:
+Mapper separates:
+- Year
+- Temperature
+
+--------------------------------------------------
+
+🔹 Step 5:
+Mapper returns key-value pair:
+(year, temperature)
+
+--------------------------------------------------
+
+🔹 Step 6:
+Store all mapped data.
+
+--------------------------------------------------
+
+🔹 Step 7:
+Pass mapped data to Reducer function.
+
+--------------------------------------------------
+
+🔹 Step 8:
+Reducer groups temperatures year-wise.
+
+--------------------------------------------------
+
+🔹 Step 9:
+Calculate average temperature for each year.
+
+--------------------------------------------------
+
+🔹 Step 10:
+Store yearly averages.
+
+--------------------------------------------------
+
+🔹 Step 11:
+Find maximum average temperature.
+
+--------------------------------------------------
+
+🔹 Step 12:
+Display hottest year.
+
+--------------------------------------------------
+
+🔹 Step 13:
+Find minimum average temperature.
+
+--------------------------------------------------
+
+🔹 Step 14:
+Display coolest year.
+
+--------------------------------------------------
+
+🔹 Step 15:
+Stop the program.
+
+====================================================================================================
+
+6. ✅ Code Explanation
+
+🔹 MAPPER FUNCTION
+
+def mapper(line):
+
+Processes one dataset record.
+
+--------------------------------------------------
+
+Line:
+line.strip().split(",")
+
+Splits year and temperature.
+
+--------------------------------------------------
+
+Line:
+return int(year), float(temp)
+
+Returns key-value pair.
+
+--------------------------------------------------
+
+🔹 REDUCER FUNCTION
+
+def reducer(mapped_data):
+
+Aggregates mapped values.
+
+--------------------------------------------------
+
+Line:
+if year not in data:
+
+Creates year entry.
+
+--------------------------------------------------
+
+Line:
+data[year].append(temp)
+
+Stores yearly temperatures.
+
+--------------------------------------------------
+
+Line:
+sum(data[year]) / len(data[year])
+
+Calculates average temperature.
+
+--------------------------------------------------
+
+🔹 FILE READING
+
+with open("weather.txt", "r")
+
+Reads dataset file.
+
+--------------------------------------------------
+
+🔹 MAP EXECUTION
+
+mapped = [mapper(line) for line in lines]
+
+Runs mapper for all records.
+
+--------------------------------------------------
+
+🔹 REDUCE EXECUTION
+
+reduced = reducer(mapped)
+
+Performs aggregation.
+
+--------------------------------------------------
+
+🔹 HOTTEST YEAR
+
+max(reduced, key=reduced.get)
+
+Finds highest average temperature.
+
+--------------------------------------------------
+
+🔹 COOLEST YEAR
+
+min(reduced, key=reduced.get)
+
+Finds lowest average temperature.
+
+--------------------------------------------------
+
+🔹 OUTPUT DISPLAY
+
+print(...)
+
+Displays results.
+
+====================================================================================================
+
+✅ FINAL CONCLUSION
+
+In this practical, we successfully implemented MapReduce for weather data analysis using Python. The program calculated yearly average temperatures and identified the hottest and coolest years from the dataset.
