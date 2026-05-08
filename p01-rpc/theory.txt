@@ -1,0 +1,296 @@
+✅ PRACTICAL 1 — RPC Factorial Program
+📄 Topic:
+Distributed application using RPC where client sends integer and server returns factorial. 
+
+1. ✅ How to Run in Short
+🔹 Step 1 — Open terminal in project folder
+cd path_to_folder
+
+🔹 Step 2 — Run Server
+python server.py
+Reason:
+Server must start first because it waits for client requests on port 8000.
+
+🔹 Step 3 — Open another terminal and run client
+python client.py
+Reason:
+Client connects to the server remotely and sends number for factorial calculation.
+
+🔹 Step 4 — Enter number
+Enter a number: 5
+Reason:
+Client sends this input to server using RPC.
+
+🔹 Step 5 — Stop server
+CTRL + C
+Reason:
+Stops server and frees port 8000.
+
+****************************************************************************************************
+
+2. ✅ Reason for the Code (Why Each Important Line is Written)
+
+🔹 Server Side
+Line:
+from xmlrpc.server import SimpleXMLRPCServer
+Reason:
+Imports RPC server module to create remote server.
+
+Line:
+class FactorialServer:
+Reason:
+Creates server class containing factorial function.
+
+Line:
+def calculate_factorial(self, n):
+Reason:
+Remote function callable by client.
+
+Line:
+if n < 0:
+Reason:
+Checks invalid negative input.
+
+Line:
+result *= i
+Reason:
+Calculates factorial using loop multiplication.
+
+Line:
+rpc_paths = ('/RPC2',)
+Reason:
+Restricts requests to specific RPC path for security.
+
+Line:
+SimpleXMLRPCServer(("localhost", 8000))
+Reason:
+Creates server on local machine using port 8000.
+
+Line:
+server.register_instance(FactorialServer())
+Reason:
+Registers class so client can access its methods.
+
+Line:
+server.serve_forever()
+Reason:
+Keeps server continuously running and listening for requests.
+
+🔹 Client Side
+Line:
+xmlrpc.client.ServerProxy(...)
+Reason:
+Creates connection to remote RPC server.
+
+Line:
+proxy.calculate_factorial(num)
+Reason:
+Calls remote factorial function from server.
+
+Line:
+except Exception as e:
+Reason:
+Handles connection or runtime errors safely.
+
+********************************************************************************************
+
+3. ✅ Viva Questions with Short Answers
+
+Q1. What is RPC?
+RPC is Remote Procedure Call used for communication between distributed systems.
+
+Q2. Why RPC is used?
+To call functions on remote machines like local functions.
+
+Q3. What is client-server architecture?
+Client sends requests and server processes them.
+
+Q4. What is XML-RPC?
+Protocol using XML for data exchange in RPC.
+
+Q5. Why port 8000 is used?
+To establish communication channel between client and server.
+
+Q6. Why server runs first?
+Because client requires active server connection.
+
+Q7. What is ServerProxy?
+Client-side object used to access remote methods.
+
+Q8. Why use localhost?
+To run client and server on same machine.
+
+Q9. What happens if server is not running?
+Client gives connection refused error.
+
+Q10. Difference between RPC and RMI?
+RPC uses procedures/functions while RMI uses objects/methods.
+
+***************************************************************************************************************
+
+4. ✅ Practical Explanation in Detail
+
+🔹 Introduction
+This practical demonstrates communication between two distributed processes using RPC (Remote Procedure Call).
+The client sends an integer to the server and the server calculates factorial and returns the result.
+
+🔹 Working Principle
+RPC works using client-server architecture.
+
+
+Client requests service
+
+
+Server processes request
+
+
+Server returns result
+
+
+The client does not directly execute factorial logic.
+Instead:
+
+
+It sends request through network
+
+
+Server executes function remotely
+
+
+
+🔹 Server Responsibilities
+The server:
+
+
+Creates RPC server
+
+
+Registers factorial method
+
+
+Waits for client requests
+
+
+Calculates factorial
+
+
+Sends result back
+
+
+
+🔹 Client Responsibilities
+The client:
+
+
+Connects to server
+
+
+Takes user input
+
+
+Calls remote method
+
+
+Displays factorial result
+
+
+
+🔹 Factorial Logic
+Factorial of number:
+n!=n×(n−1)×(n−2)×⋯×1
+
+Example:
+5!=5×4×3×2×1=120
+5! = 5 \times 4 \times 3 \times 2 \times 1 = 120
+5!=5×4×3×2×1=120
+
+🔹 Advantages of RPC
+
+
+Distributed communication
+
+
+Easy remote execution
+
+
+Simplifies network programming
+
+
+Supports client-server model
+
+
+
+🔹 Applications
+
+
+Distributed systems
+
+
+Banking systems
+
+
+Cloud computing
+
+
+Remote services
+
+
+
+5. ✅ Code Explanation
+
+🔹 SERVER CODE FLOW
+
+Step 1 — Import libraries
+from xmlrpc.server import SimpleXMLRPCServer
+Used to create XML-RPC server.
+
+Step 2 — Create factorial class
+class FactorialServer:
+Contains remote factorial method.
+
+Step 3 — Define factorial function
+def calculate_factorial(self, n):
+Accepts integer from client.
+
+Step 4 — Check negative condition
+if n < 0:
+Prevents invalid factorial.
+
+Step 5 — Calculate factorial
+for i in range(1, n + 1):
+Loops from 1 to n.
+
+Step 6 — Create RPC server
+SimpleXMLRPCServer(("localhost", 8000))
+Starts server on port 8000.
+
+Step 7 — Register class
+server.register_instance(FactorialServer())
+Makes factorial method remotely accessible.
+
+Step 8 — Start server loop
+server.serve_forever()
+Continuously waits for client requests.
+
+🔹 CLIENT CODE FLOW
+
+Step 1 — Import client module
+import xmlrpc.client
+Used for RPC communication.
+
+Step 2 — Connect to server
+ServerProxy("http://localhost:8000/RPC2")
+Creates remote connection.
+
+Step 3 — Take user input
+num = int(input())
+Reads integer value.
+
+Step 4 — Call remote method
+proxy.calculate_factorial(num)
+Sends request to server.
+
+Step 5 — Print result
+print(result)
+Displays factorial returned from server.
+
