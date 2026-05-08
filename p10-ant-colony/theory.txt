@@ -1,0 +1,545 @@
+✅ PRACTICAL 10 — Ant Colony Optimization (ACO)
+
+📄 Topic:
+Implementation of Ant Colony Optimization Algorithm using Python.
+
+====================================================================================================
+
+1. ✅ How to Run in Short
+
+🔹 Step 1 — Install NumPy library
+
+pip install numpy
+
+Reason:
+NumPy is required for matrix and numerical operations.
+
+--------------------------------------------------
+
+🔹 Step 2 — Open terminal in project folder
+
+cd path_to_folder
+
+Reason:
+To access Python file from terminal.
+
+--------------------------------------------------
+
+🔹 Step 3 — Run Python file
+
+python ant_colony.py
+
+Reason:
+Executes Ant Colony Optimization algorithm.
+
+--------------------------------------------------
+
+🔹 Step 4 — Observe output
+
+Reason:
+Displays best tour and shortest distance.
+
+====================================================================================================
+
+2. ✅ Reason for the Code (Why Each Important Line is Written)
+
+🔹 IMPORT NUMPY
+
+Line:
+import numpy as np
+
+Reason:
+Used for matrices and numerical calculations.
+
+--------------------------------------------------
+
+🔹 CITY DATASET
+
+Line:
+cities = np.array(...)
+
+Reason:
+Defines coordinates of cities.
+
+--------------------------------------------------
+
+🔹 PARAMETERS
+
+Line:
+num_ants = 5
+
+Reason:
+Defines number of ants exploring paths.
+
+--------------------------------------------------
+
+Line:
+alpha = 1
+
+Reason:
+Controls pheromone importance.
+
+--------------------------------------------------
+
+Line:
+beta = 2
+
+Reason:
+Controls distance importance.
+
+--------------------------------------------------
+
+Line:
+rho = 0.1
+
+Reason:
+Controls pheromone evaporation rate.
+
+--------------------------------------------------
+
+🔹 PHEROMONE MATRIX
+
+Line:
+pheromone = np.ones(...)
+
+Reason:
+Initializes pheromone levels equally.
+
+--------------------------------------------------
+
+🔹 DISTANCE FUNCTION
+
+Line:
+np.linalg.norm(...)
+
+Reason:
+Calculates Euclidean distance between cities.
+
+--------------------------------------------------
+
+🔹 PROBABILITY CALCULATION
+
+Line:
+(probability = pheromone^alpha × (1/distance)^beta)
+
+Reason:
+Determines next city selection probability.
+
+--------------------------------------------------
+
+🔹 PHEROMONE UPDATE
+
+Line:
+pheromone *= (1 - rho)
+
+Reason:
+Evaporates old pheromone trails.
+
+--------------------------------------------------
+
+Line:
+pheromone += (Q / distance)
+
+Reason:
+Deposits pheromone on shorter paths.
+
+====================================================================================================
+
+3. ✅ Viva Questions with Short Answers
+
+Q1. What is Ant Colony Optimization?
+ACO is a bio-inspired optimization algorithm based on ant behavior.
+
+--------------------------------------------------
+
+Q2. What are pheromones?
+Chemical trails used by ants for communication.
+
+--------------------------------------------------
+
+Q3. What is evaporation in ACO?
+Reduction of pheromone intensity over time.
+
+--------------------------------------------------
+
+Q4. Why shorter paths become stronger?
+More ants travel and deposit pheromones on shorter paths.
+
+--------------------------------------------------
+
+Q5. What is heuristic information?
+Distance-based path preference.
+
+--------------------------------------------------
+
+Q6. What is alpha in ACO?
+Controls importance of pheromone.
+
+--------------------------------------------------
+
+Q7. What is beta in ACO?
+Controls importance of distance.
+
+--------------------------------------------------
+
+Q8. What is rho?
+Pheromone evaporation rate.
+
+--------------------------------------------------
+
+Q9. Applications of ACO?
+Routing, scheduling, shortest path problems.
+
+--------------------------------------------------
+
+Q10. What type of algorithm is ACO?
+Swarm intelligence optimization algorithm.
+
+====================================================================================================
+
+4. ✅ Practical Explanation in Detail
+
+🔹 Introduction
+
+This practical demonstrates implementation of Ant Colony Optimization (ACO), a swarm intelligence algorithm inspired by real ant behavior.
+
+ACO is mainly used for:
+- Shortest path problems
+- Optimization problems
+- Traveling Salesman Problem (TSP)
+
+--------------------------------------------------
+
+🔹 Biological Inspiration
+
+Real ants search for food randomly.
+
+While moving:
+- They deposit pheromones on paths.
+- Other ants follow stronger pheromone trails.
+- Shorter paths accumulate more pheromones.
+
+Finally:
+- Entire colony converges toward shortest path.
+
+--------------------------------------------------
+
+🔹 Swarm Intelligence
+
+ACO belongs to Swarm Intelligence techniques where multiple agents cooperate to solve problems.
+
+Agents:
+- Ants
+
+Communication:
+- Pheromones
+
+--------------------------------------------------
+
+🔹 Objective of Practical
+
+The objective is to find shortest path among cities using artificial ants.
+
+--------------------------------------------------
+
+🔹 City Representation
+
+Cities are represented using coordinates:
+
+Example:
+[0,0], [1,2], [3,1]
+
+--------------------------------------------------
+
+🔹 Pheromone Matrix
+
+Pheromone matrix stores pheromone intensity between cities.
+
+Initially:
+All paths have equal pheromone.
+
+--------------------------------------------------
+
+🔹 Distance Calculation
+
+Distance between cities is calculated using Euclidean distance formula.
+
+Formula:
+
+d = √[(x₂-x₁)² + (y₂-y₁)²]
+
+--------------------------------------------------
+
+🔹 Probability Formula
+
+Ant chooses next city using probability:
+
+P = (pheromone^alpha) × ((1/distance)^beta)
+
+Where:
+- alpha → pheromone importance
+- beta → distance importance
+
+--------------------------------------------------
+
+🔹 Pheromone Evaporation
+
+Old pheromone trails gradually decrease.
+
+Purpose:
+- Avoid unlimited pheromone accumulation
+- Encourage exploration
+
+--------------------------------------------------
+
+🔹 Pheromone Deposition
+
+Ants deposit pheromones on traveled paths.
+
+Shorter paths receive:
+- More pheromone
+- Higher probability
+
+--------------------------------------------------
+
+🔹 Best Tour
+
+Algorithm continuously updates:
+- Best path
+- Minimum distance
+
+--------------------------------------------------
+
+🔹 Advantages of ACO
+
+- Good optimization ability
+- Distributed computation
+- Adaptive behavior
+- Finds near-optimal solutions
+
+--------------------------------------------------
+
+🔹 Applications
+
+- Network routing
+- Vehicle routing
+- Robotics
+- Scheduling
+- Traveling Salesman Problem
+
+====================================================================================================
+
+5. ✅ Ant Colony Optimization Algorithm (Detailed)
+
+🔹 Step 1:
+Start the algorithm.
+
+--------------------------------------------------
+
+🔹 Step 2:
+Initialize cities and distances.
+
+--------------------------------------------------
+
+🔹 Step 3:
+Initialize pheromone matrix with equal values.
+
+--------------------------------------------------
+
+🔹 Step 4:
+Place ants randomly on cities.
+
+--------------------------------------------------
+
+🔹 Step 5:
+For each ant:
+- Select next city based on probability formula.
+
+--------------------------------------------------
+
+🔹 Step 6:
+Calculate probability using:
+- Pheromone level
+- Distance heuristic
+
+--------------------------------------------------
+
+🔹 Step 7:
+Move ant to selected city.
+
+--------------------------------------------------
+
+🔹 Step 8:
+Repeat until all cities are visited.
+
+--------------------------------------------------
+
+🔹 Step 9:
+Calculate total distance traveled by each ant.
+
+--------------------------------------------------
+
+🔹 Step 10:
+Update pheromone trails.
+
+--------------------------------------------------
+
+🔹 Step 11:
+Apply pheromone evaporation.
+
+--------------------------------------------------
+
+🔹 Step 12:
+Deposit pheromone on shorter paths.
+
+--------------------------------------------------
+
+🔹 Step 13:
+Update best tour and shortest distance.
+
+--------------------------------------------------
+
+🔹 Step 14:
+Repeat process for multiple iterations.
+
+--------------------------------------------------
+
+🔹 Step 15:
+Display final best tour and minimum distance.
+
+====================================================================================================
+
+6. ✅ Code Explanation
+
+🔹 IMPORT MODULE
+
+import numpy as np
+
+Used for numerical operations and matrices.
+
+--------------------------------------------------
+
+🔹 CITY MATRIX
+
+cities = np.array(...)
+
+Stores city coordinates.
+
+--------------------------------------------------
+
+🔹 PARAMETERS
+
+num_ants = 5
+
+Defines number of ants.
+
+--------------------------------------------------
+
+alpha = 1
+
+Controls pheromone importance.
+
+--------------------------------------------------
+
+beta = 2
+
+Controls distance importance.
+
+--------------------------------------------------
+
+rho = 0.1
+
+Controls pheromone evaporation.
+
+--------------------------------------------------
+
+🔹 PHEROMONE MATRIX
+
+pheromone = np.ones(...)
+
+Initializes pheromone values.
+
+--------------------------------------------------
+
+🔹 DISTANCE FUNCTION
+
+def distance(city1, city2):
+
+Calculates Euclidean distance.
+
+--------------------------------------------------
+
+Line:
+np.linalg.norm(...)
+
+Computes vector distance.
+
+--------------------------------------------------
+
+🔹 MAIN ITERATION LOOP
+
+for iteration in range(num_iterations):
+
+Runs optimization repeatedly.
+
+--------------------------------------------------
+
+🔹 ANT MOVEMENT
+
+for ant in range(num_ants):
+
+Moves ants independently.
+
+--------------------------------------------------
+
+🔹 PROBABILITY CALCULATION
+
+(probability = pheromone^alpha × (1/distance)^beta)
+
+Computes next city probability.
+
+--------------------------------------------------
+
+🔹 NEXT CITY SELECTION
+
+np.random.choice(...)
+
+Chooses city probabilistically.
+
+--------------------------------------------------
+
+🔹 PHEROMONE EVAPORATION
+
+pheromone *= (1 - rho)
+
+Reduces old pheromone.
+
+--------------------------------------------------
+
+🔹 PHEROMONE UPDATE
+
+pheromone += (Q / distance)
+
+Adds pheromone on good paths.
+
+--------------------------------------------------
+
+🔹 BEST TOUR UPDATE
+
+if current_distance < best_distance
+
+Stores shortest path.
+
+--------------------------------------------------
+
+🔹 FINAL OUTPUT
+
+print("Best tour:", best_tour)
+
+Displays optimal path.
+
+====================================================================================================
+
+✅ FINAL CONCLUSION
+
+In this practical, we successfully implemented Ant Colony Optimization using Python. The algorithm used pheromone trails, probabilistic path selection, and swarm intelligence concepts to determine the shortest possible route among cities.
