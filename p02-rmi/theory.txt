@@ -1,0 +1,462 @@
+✅ PRACTICAL 2 — RMI String Concatenation using Pyro4
+
+📄 Topic:
+Distributed application using RMI where client sends two strings and server returns concatenated string.
+
+====================================================================================================
+
+1. ✅ How to Run in Short
+
+🔹 Step 1 — Install Pyro4
+pip install Pyro4
+
+Reason:
+Pyro4 library is required for Remote Method Invocation in Python.
+
+--------------------------------------------------
+
+🔹 Step 2 — Start Pyro Name Server
+pyro4-ns
+
+Reason:
+Name server helps clients locate remote server objects.
+
+--------------------------------------------------
+
+🔹 Step 3 — Open another terminal and run server
+python server.py
+
+Reason:
+Server creates remote object and registers it with Pyro Name Server.
+
+--------------------------------------------------
+
+🔹 Step 4 — Copy generated URI
+
+Reason:
+Client needs URI to connect to remote server.
+
+--------------------------------------------------
+
+🔹 Step 5 — Open another terminal and run client
+python client.py
+
+Reason:
+Client sends remote request to server.
+
+--------------------------------------------------
+
+🔹 Step 6 — Paste URI and enter strings
+
+Example:
+Hello
+World
+
+Reason:
+Strings are sent remotely to server for concatenation.
+
+--------------------------------------------------
+
+🔹 Step 7 — Stop processes
+CTRL + C
+
+Reason:
+Stops server and frees resources.
+
+====================================================================================================
+
+2. ✅ Reason for the Code (Why Each Important Line is Written)
+
+🔹 SERVER SIDE
+
+Line:
+import Pyro4
+
+Reason:
+Imports Pyro4 library for RMI communication.
+
+--------------------------------------------------
+
+Line:
+@Pyro4.expose
+
+Reason:
+Makes class methods remotely accessible to clients.
+
+--------------------------------------------------
+
+Line:
+class StringServer:
+
+Reason:
+Creates server class containing remote methods.
+
+--------------------------------------------------
+
+Line:
+def concatenate(self, str1, str2):
+
+Reason:
+Remote function for string concatenation.
+
+--------------------------------------------------
+
+Line:
+return str1 + str2
+
+Reason:
+Performs actual string concatenation.
+
+--------------------------------------------------
+
+Line:
+daemon = Pyro4.Daemon()
+
+Reason:
+Creates Pyro server daemon to listen for client requests.
+
+--------------------------------------------------
+
+Line:
+ns = Pyro4.locateNS()
+
+Reason:
+Connects server to Pyro Name Server.
+
+--------------------------------------------------
+
+Line:
+uri = daemon.register(server)
+
+Reason:
+Registers remote object and generates URI.
+
+--------------------------------------------------
+
+Line:
+ns.register("string.concat", uri)
+
+Reason:
+Stores URI in Name Server using logical name.
+
+--------------------------------------------------
+
+Line:
+daemon.requestLoop()
+
+Reason:
+Keeps server continuously listening for client requests.
+
+--------------------------------------------------
+
+🔹 CLIENT SIDE
+
+Line:
+uri = input("Paste server URI: ")
+
+Reason:
+Takes server URI from user.
+
+--------------------------------------------------
+
+Line:
+server = Pyro4.Proxy(uri)
+
+Reason:
+Creates remote connection to server object.
+
+--------------------------------------------------
+
+Line:
+result = server.concatenate(str1, str2)
+
+Reason:
+Calls remote concatenate function.
+
+--------------------------------------------------
+
+Line:
+print("Result:", result)
+
+Reason:
+Displays concatenated string returned by server.
+
+====================================================================================================
+
+3. ✅ Viva Questions with Short Answers
+
+Q1. What is RMI?
+RMI is Remote Method Invocation used to call methods on remote objects.
+
+--------------------------------------------------
+
+Q2. What is Pyro4?
+Pyro4 is a Python library for distributed object communication.
+
+--------------------------------------------------
+
+Q3. Why Pyro4 is used?
+To simplify remote communication between Python programs.
+
+--------------------------------------------------
+
+Q4. What is Name Server?
+It stores and locates remote object references.
+
+--------------------------------------------------
+
+Q5. What is URI in Pyro?
+URI uniquely identifies remote object location.
+
+--------------------------------------------------
+
+Q6. Why server runs first?
+Because client requires active remote object connection.
+
+--------------------------------------------------
+
+Q7. What is daemon in Pyro?
+Daemon handles remote requests from clients.
+
+--------------------------------------------------
+
+Q8. Difference between RPC and RMI?
+RPC calls functions while RMI calls object methods.
+
+--------------------------------------------------
+
+Q9. Why use localhost?
+To run distributed application on same machine.
+
+--------------------------------------------------
+
+Q10. What happens if Name Server is not running?
+Server and client cannot locate remote objects.
+
+====================================================================================================
+
+4. ✅ Practical Explanation in Detail
+
+🔹 Introduction
+
+This practical demonstrates distributed communication using Remote Method Invocation (RMI) in Python with Pyro4.
+
+The client sends two strings to the server.
+The server concatenates both strings and sends result back to client.
+
+--------------------------------------------------
+
+🔹 Working Principle
+
+RMI follows client-server architecture.
+
+1. Server creates remote object.
+2. Server registers object with Name Server.
+3. Client connects using URI.
+4. Client invokes remote method.
+5. Server processes request.
+6. Result is returned to client.
+
+--------------------------------------------------
+
+🔹 Role of Name Server
+
+The Name Server acts like a directory service.
+
+It:
+- Stores remote object URIs
+- Helps clients find servers
+- Simplifies distributed communication
+
+--------------------------------------------------
+
+🔹 Server Responsibilities
+
+The server:
+- Creates remote object
+- Registers object
+- Waits for requests
+- Processes string concatenation
+- Returns result
+
+--------------------------------------------------
+
+🔹 Client Responsibilities
+
+The client:
+- Connects to remote server
+- Sends strings
+- Invokes remote method
+- Displays result
+
+--------------------------------------------------
+
+🔹 String Concatenation Logic
+
+Concatenation combines two strings.
+
+Example:
+"Hello" + "World" = "HelloWorld"
+
+--------------------------------------------------
+
+🔹 Advantages of RMI
+
+- Supports distributed computing
+- Simplifies remote communication
+- Object-oriented communication
+- Easy method invocation
+
+--------------------------------------------------
+
+🔹 Applications
+
+- Distributed systems
+- Cloud computing
+- Remote services
+- Enterprise applications
+
+====================================================================================================
+
+5. ✅ Code Explanation
+
+🔹 SERVER CODE FLOW
+
+--------------------------------------------------
+
+Step 1 — Import Pyro4 library
+
+import Pyro4
+
+Used for RMI communication.
+
+--------------------------------------------------
+
+Step 2 — Expose class remotely
+
+@Pyro4.expose
+
+Makes methods accessible remotely.
+
+--------------------------------------------------
+
+Step 3 — Create server class
+
+class StringServer:
+
+Contains remote methods.
+
+--------------------------------------------------
+
+Step 4 — Define concatenate method
+
+def concatenate(self, str1, str2):
+
+Accepts strings from client.
+
+--------------------------------------------------
+
+Step 5 — Concatenate strings
+
+return str1 + str2
+
+Combines two strings.
+
+--------------------------------------------------
+
+Step 6 — Create daemon
+
+daemon = Pyro4.Daemon()
+
+Starts Pyro server.
+
+--------------------------------------------------
+
+Step 7 — Locate Name Server
+
+ns = Pyro4.locateNS()
+
+Connects to Name Server.
+
+--------------------------------------------------
+
+Step 8 — Register remote object
+
+uri = daemon.register(server)
+
+Creates object URI.
+
+--------------------------------------------------
+
+Step 9 — Register URI in Name Server
+
+ns.register("string.concat", uri)
+
+Stores object reference.
+
+--------------------------------------------------
+
+Step 10 — Start request loop
+
+daemon.requestLoop()
+
+Continuously listens for client requests.
+
+--------------------------------------------------
+
+🔹 CLIENT CODE FLOW
+
+--------------------------------------------------
+
+Step 1 — Import Pyro4
+
+import Pyro4
+
+Used for remote communication.
+
+--------------------------------------------------
+
+Step 2 — Read URI
+
+uri = input(...)
+
+Takes server URI.
+
+--------------------------------------------------
+
+Step 3 — Create proxy object
+
+server = Pyro4.Proxy(uri)
+
+Connects to remote object.
+
+--------------------------------------------------
+
+Step 4 — Read input strings
+
+str1 = input(...)
+str2 = input(...)
+
+Takes user input.
+
+--------------------------------------------------
+
+Step 5 — Call remote method
+
+server.concatenate(str1, str2)
+
+Sends request to server.
+
+--------------------------------------------------
+
+Step 6 — Display result
+
+print(result)
+
+Prints concatenated string.
+
+====================================================================================================
+
+✅ FINAL CONCLUSION
+
+In this practical, we successfully implemented Remote Method Invocation (RMI) using Pyro4 where the client remotely invoked a string concatenation method on the server and received the result successfully.
