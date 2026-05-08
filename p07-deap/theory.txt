@@ -1,0 +1,531 @@
+✅ PRACTICAL 7 — DEAP (Distributed Evolutionary Algorithms in Python)
+
+📄 Topic:
+Implementation of Evolutionary Algorithm using DEAP library in Python.
+
+====================================================================================================
+
+1. ✅ How to Run in Short
+
+🔹 Step 1 — Install DEAP library
+
+pip install deap
+
+Reason:
+DEAP library provides ready-made tools for evolutionary algorithms.
+
+--------------------------------------------------
+
+🔹 Step 2 — Open terminal in project folder
+
+cd path_to_folder
+
+Reason:
+To access Python file from terminal.
+
+--------------------------------------------------
+
+🔹 Step 3 — Run Python file
+
+python deap.py
+
+Reason:
+Executes evolutionary optimization using DEAP library.
+
+--------------------------------------------------
+
+🔹 Step 4 — Observe output
+
+Reason:
+Displays best solution and fitness value for each generation.
+
+====================================================================================================
+
+2. ✅ Reason for the Code (Why Each Important Line is Written)
+
+🔹 IMPORT RANDOM
+
+Line:
+import random
+
+Reason:
+Used for random generation, crossover, and mutation.
+
+--------------------------------------------------
+
+🔹 IMPORT DEAP MODULES
+
+Line:
+from deap import base, creator, tools
+
+Reason:
+Imports DEAP components for evolutionary algorithms.
+
+--------------------------------------------------
+
+🔹 FITNESS CLASS
+
+Line:
+creator.create("FitnessMax", base.Fitness, weights=(1.0,))
+
+Reason:
+Defines fitness class for maximization problem.
+
+--------------------------------------------------
+
+🔹 INDIVIDUAL CLASS
+
+Line:
+creator.create("Individual", list, fitness=creator.FitnessMax)
+
+Reason:
+Creates individual chromosome structure.
+
+--------------------------------------------------
+
+🔹 TOOLBOX
+
+Line:
+toolbox = base.Toolbox()
+
+Reason:
+Stores all evolutionary operators.
+
+--------------------------------------------------
+
+🔹 ATTRIBUTE GENERATION
+
+Line:
+toolbox.register("attr_float", random.uniform, -10, 10)
+
+Reason:
+Generates random gene values.
+
+--------------------------------------------------
+
+🔹 INDIVIDUAL GENERATION
+
+Line:
+tools.initRepeat(...)
+
+Reason:
+Creates chromosome using repeated attributes.
+
+--------------------------------------------------
+
+🔹 FITNESS FUNCTION
+
+Line:
+return (x**2,)
+
+Reason:
+Evaluates chromosome fitness.
+
+--------------------------------------------------
+
+🔹 CROSSOVER
+
+Line:
+tools.cxBlend
+
+Reason:
+Combines parent chromosomes.
+
+--------------------------------------------------
+
+🔹 MUTATION
+
+Line:
+tools.mutGaussian
+
+Reason:
+Introduces random variation.
+
+--------------------------------------------------
+
+🔹 SELECTION
+
+Line:
+tools.selTournament
+
+Reason:
+Selects best individuals.
+
+--------------------------------------------------
+
+🔹 GENERATION LOOP
+
+Line:
+for gen in range(generations):
+
+Reason:
+Runs optimization repeatedly.
+
+====================================================================================================
+
+3. ✅ Viva Questions with Short Answers
+
+Q1. What is DEAP?
+DEAP is a Python framework for evolutionary algorithms.
+
+--------------------------------------------------
+
+Q2. What is evolutionary algorithm?
+Optimization algorithm inspired by biological evolution.
+
+--------------------------------------------------
+
+Q3. What is fitness in DEAP?
+Measure of solution quality.
+
+--------------------------------------------------
+
+Q4. What is an individual?
+A candidate solution or chromosome.
+
+--------------------------------------------------
+
+Q5. What is population?
+Collection of individuals.
+
+--------------------------------------------------
+
+Q6. What is crossover?
+Combining genes from parent individuals.
+
+--------------------------------------------------
+
+Q7. What is mutation?
+Random modification in chromosome.
+
+--------------------------------------------------
+
+Q8. What is selection?
+Choosing best individuals for next generation.
+
+--------------------------------------------------
+
+Q9. What is toolbox in DEAP?
+Container for evolutionary operators and functions.
+
+--------------------------------------------------
+
+Q10. Advantages of DEAP?
+Simplifies implementation of evolutionary algorithms.
+
+====================================================================================================
+
+4. ✅ Practical Explanation in Detail
+
+🔹 Introduction
+
+This practical demonstrates implementation of Evolutionary Algorithms using DEAP library in Python.
+
+DEAP stands for:
+Distributed Evolutionary Algorithms in Python.
+
+It provides tools for:
+- Genetic Algorithms
+- Evolutionary Computation
+- Optimization Problems
+
+--------------------------------------------------
+
+🔹 Evolutionary Algorithm
+
+Evolutionary Algorithms are inspired by biological evolution.
+
+They use:
+- Selection
+- Crossover
+- Mutation
+
+to improve solutions generation by generation.
+
+--------------------------------------------------
+
+🔹 Objective of Practical
+
+The objective is to maximize fitness function:
+
+f(x) = x²
+
+The algorithm searches for value of x giving maximum fitness.
+
+--------------------------------------------------
+
+🔹 DEAP Framework
+
+DEAP simplifies implementation by providing:
+- Fitness classes
+- Individuals
+- Populations
+- Selection operators
+- Mutation operators
+- Crossover operators
+
+--------------------------------------------------
+
+🔹 Individual
+
+An individual represents one candidate solution.
+
+Example:
+[5.2]
+
+--------------------------------------------------
+
+🔹 Population
+
+Population is a collection of individuals.
+
+--------------------------------------------------
+
+🔹 Fitness Function
+
+Fitness evaluates solution quality.
+
+Higher fitness means better solution.
+
+--------------------------------------------------
+
+🔹 Selection
+
+Tournament Selection chooses best individuals from random groups.
+
+--------------------------------------------------
+
+🔹 Crossover
+
+Crossover combines genes from parent individuals to create offspring.
+
+--------------------------------------------------
+
+🔹 Mutation
+
+Mutation introduces random changes to increase diversity.
+
+--------------------------------------------------
+
+🔹 Generations
+
+Optimization process repeats over multiple generations to improve solution quality.
+
+--------------------------------------------------
+
+🔹 Advantages of DEAP
+
+- Easy implementation
+- Modular framework
+- Supports distributed computation
+- Provides many evolutionary operators
+
+--------------------------------------------------
+
+🔹 Applications
+
+- Optimization problems
+- Machine learning
+- Robotics
+- Scheduling
+- Artificial intelligence
+
+====================================================================================================
+
+5. ✅ Algorithm (Detailed)
+
+🔹 Step 1:
+Start the algorithm.
+
+--------------------------------------------------
+
+🔹 Step 2:
+Create fitness class for maximization problem.
+
+--------------------------------------------------
+
+🔹 Step 3:
+Create individual chromosome structure.
+
+--------------------------------------------------
+
+🔹 Step 4:
+Initialize toolbox for storing evolutionary operators.
+
+--------------------------------------------------
+
+🔹 Step 5:
+Generate random population of individuals.
+
+--------------------------------------------------
+
+🔹 Step 6:
+Evaluate fitness of each individual using fitness function.
+
+--------------------------------------------------
+
+🔹 Step 7:
+Select best individuals using tournament selection.
+
+--------------------------------------------------
+
+🔹 Step 8:
+Apply crossover operation to selected individuals.
+
+--------------------------------------------------
+
+🔹 Step 9:
+Apply mutation operation to offspring.
+
+--------------------------------------------------
+
+🔹 Step 10:
+Recalculate fitness of modified individuals.
+
+--------------------------------------------------
+
+🔹 Step 11:
+Replace old population with new offspring population.
+
+--------------------------------------------------
+
+🔹 Step 12:
+Repeat Steps 6–11 for multiple generations.
+
+--------------------------------------------------
+
+🔹 Step 13:
+Display best individual and fitness value.
+
+====================================================================================================
+
+6. ✅ Code Explanation
+
+🔹 IMPORT MODULES
+
+import random
+
+Used for random number generation.
+
+--------------------------------------------------
+
+from deap import base, creator, tools
+
+Imports DEAP framework components.
+
+--------------------------------------------------
+
+🔹 FITNESS CLASS
+
+creator.create("FitnessMax", ...)
+
+Defines fitness for maximization.
+
+--------------------------------------------------
+
+🔹 INDIVIDUAL CLASS
+
+creator.create("Individual", ...)
+
+Creates chromosome structure.
+
+--------------------------------------------------
+
+🔹 TOOLBOX
+
+toolbox = base.Toolbox()
+
+Stores evolutionary functions.
+
+--------------------------------------------------
+
+🔹 ATTRIBUTE GENERATION
+
+toolbox.register("attr_float", random.uniform, -10, 10)
+
+Creates random gene values.
+
+--------------------------------------------------
+
+🔹 INDIVIDUAL GENERATION
+
+tools.initRepeat(...)
+
+Creates individual using repeated attributes.
+
+--------------------------------------------------
+
+🔹 POPULATION GENERATION
+
+toolbox.population(n=10)
+
+Creates population of 10 individuals.
+
+--------------------------------------------------
+
+🔹 FITNESS FUNCTION
+
+def eval_func(individual):
+
+Evaluates solution quality.
+
+--------------------------------------------------
+
+Line:
+return (x**2,)
+
+Returns fitness value.
+
+--------------------------------------------------
+
+🔹 CROSSOVER
+
+toolbox.mate(...)
+
+Combines parent genes.
+
+--------------------------------------------------
+
+🔹 MUTATION
+
+toolbox.mutate(...)
+
+Adds random variation.
+
+--------------------------------------------------
+
+🔹 SELECTION
+
+toolbox.select(...)
+
+Chooses best individuals.
+
+--------------------------------------------------
+
+🔹 GENERATION LOOP
+
+for gen in range(generations):
+
+Runs optimization repeatedly.
+
+--------------------------------------------------
+
+🔹 BEST SOLUTION
+
+max(population, ...)
+
+Finds best individual.
+
+--------------------------------------------------
+
+🔹 MAIN PROGRAM
+
+best = main()
+
+Executes complete optimization process.
+
+====================================================================================================
+
+✅ FINAL CONCLUSION
+
+In this practical, we successfully implemented an Evolutionary Algorithm using DEAP library in Python. The algorithm optimized candidate solutions using selection, crossover, and mutation over multiple generations.
