@@ -1,0 +1,533 @@
+✅ PRACTICAL 8 — Java RMI Hotel Booking System
+
+📄 Topic:
+Implementation of Hotel Booking System using Java RMI (Remote Method Invocation).
+
+====================================================================================================
+
+1. ✅ How to Run in Short
+
+🔹 Step 1 — Open terminal in project folder
+
+cd path_to_folder
+
+Reason:
+To access Java files from terminal.
+
+--------------------------------------------------
+
+🔹 Step 2 — Compile all Java files
+
+javac *.java
+
+Reason:
+Converts Java source code into bytecode (.class files).
+
+--------------------------------------------------
+
+🔹 Step 3 — Kill existing RMI port if needed
+
+fuser -k 1099/tcp
+
+Reason:
+Frees RMI registry port if already in use.
+
+--------------------------------------------------
+
+🔹 Step 4 — Run Server
+
+java HotelServer
+
+Reason:
+Starts RMI server and creates remote object.
+
+--------------------------------------------------
+
+🔹 Step 5 — Open another terminal and run client
+
+java HotelClient
+
+Reason:
+Client connects to remote hotel service.
+
+--------------------------------------------------
+
+🔹 Step 6 — Enter booking details
+
+Reason:
+Client remotely calls booking methods on server.
+
+--------------------------------------------------
+
+🔹 Step 7 — Stop server
+
+CTRL + C
+
+Reason:
+Stops server and frees resources.
+
+====================================================================================================
+
+2. ✅ Reason for the Code (Why Each Important Line is Written)
+
+🔹 REMOTE INTERFACE
+
+Line:
+public interface HotelServiceInterface extends Remote
+
+Reason:
+Defines remote methods accessible to clients.
+
+--------------------------------------------------
+
+🔹 REMOTE METHODS
+
+Line:
+throws RemoteException
+
+Reason:
+Handles remote communication errors.
+
+--------------------------------------------------
+
+🔹 SERVER CLASS
+
+Line:
+extends UnicastRemoteObject
+
+Reason:
+Makes object remotely accessible.
+
+--------------------------------------------------
+
+🔹 IMPLEMENTS INTERFACE
+
+Line:
+implements HotelServiceInterface
+
+Reason:
+Implements remote methods.
+
+--------------------------------------------------
+
+🔹 HASHMAP
+
+Line:
+private Map<Integer, String> bookings
+
+Reason:
+Stores room bookings.
+
+--------------------------------------------------
+
+🔹 SYNCHRONIZED METHOD
+
+Line:
+public synchronized boolean bookRoom(...)
+
+Reason:
+Prevents multiple clients from modifying data simultaneously.
+
+--------------------------------------------------
+
+🔹 ROOM CHECK
+
+Line:
+if (!bookings.containsKey(roomNumber))
+
+Reason:
+Checks if room is already booked.
+
+--------------------------------------------------
+
+🔹 REGISTER SERVER
+
+Line:
+Naming.rebind("HotelService", server)
+
+Reason:
+Registers remote object in RMI registry.
+
+--------------------------------------------------
+
+🔹 LOOKUP
+
+Line:
+Naming.lookup(...)
+
+Reason:
+Client locates remote object.
+
+--------------------------------------------------
+
+🔹 MENU LOOP
+
+Line:
+while(true)
+
+Reason:
+Allows continuous client operations.
+
+====================================================================================================
+
+3. ✅ Viva Questions with Short Answers
+
+Q1. What is Java RMI?
+Java RMI allows remote method invocation between Java applications.
+
+--------------------------------------------------
+
+Q2. What is remote interface?
+Interface containing remote methods.
+
+--------------------------------------------------
+
+Q3. What is RemoteException?
+Exception for network communication failures.
+
+--------------------------------------------------
+
+Q4. What is RMI Registry?
+Directory service storing remote objects.
+
+--------------------------------------------------
+
+Q5. What is UnicastRemoteObject?
+Class used to export remote objects.
+
+--------------------------------------------------
+
+Q6. Why synchronized methods are used?
+To avoid concurrent data conflicts.
+
+--------------------------------------------------
+
+Q7. What is Naming.lookup()?
+Method used by client to locate remote object.
+
+--------------------------------------------------
+
+Q8. What is Naming.rebind()?
+Registers remote object with registry.
+
+--------------------------------------------------
+
+Q9. What is client-server architecture?
+Client requests services and server processes them.
+
+--------------------------------------------------
+
+Q10. Applications of Java RMI?
+Distributed systems, banking, reservation systems.
+
+====================================================================================================
+
+4. ✅ Difference Between Java RMI and Python RMI (Pyro4)
+
+Java RMI                                  Python RMI (Pyro4)
+
+Only Java language                     Python-based implementation
+
+Built-in Java API                      External library (Pyro4)
+
+Uses Remote Interface                  Uses exposed classes
+
+Uses RMI Registry                      Uses Pyro Name Server
+
+Strict object-oriented                 More flexible and lightweight
+
+Requires compilation                   Interpreted execution
+
+More secure and robust                 Easier implementation
+
+Used mainly in enterprise systems      Used in lightweight distributed systems
+
+====================================================================================================
+
+5. ✅ Practical Explanation in Detail
+
+🔹 Introduction
+
+This practical demonstrates implementation of a distributed Hotel Booking System using Java RMI.
+
+RMI allows methods of remote objects to be invoked from another JVM.
+
+The system allows clients to:
+- Book hotel rooms
+- Cancel bookings
+
+through remote communication.
+
+--------------------------------------------------
+
+🔹 Java RMI Architecture
+
+Java RMI uses:
+1. Client
+2. Server
+3. Remote Interface
+4. RMI Registry
+
+--------------------------------------------------
+
+🔹 Remote Interface
+
+The remote interface defines methods accessible remotely.
+
+Methods:
+- bookRoom()
+- cancelBooking()
+
+--------------------------------------------------
+
+🔹 Server
+
+The server:
+- Implements remote interface
+- Stores booking information
+- Registers object with RMI registry
+- Waits for client requests
+
+--------------------------------------------------
+
+🔹 Client
+
+The client:
+- Connects to RMI registry
+- Looks up remote object
+- Invokes booking methods remotely
+
+--------------------------------------------------
+
+🔹 RMI Registry
+
+Acts like a directory service.
+
+It stores:
+- Remote object names
+- Object references
+
+--------------------------------------------------
+
+🔹 Hotel Booking Logic
+
+Booking:
+- Checks room availability
+- Stores booking details
+
+Cancellation:
+- Searches customer booking
+- Removes booking from records
+
+--------------------------------------------------
+
+🔹 Synchronization
+
+Synchronized methods ensure:
+- Multiple clients do not modify data simultaneously
+- Data consistency is maintained
+
+--------------------------------------------------
+
+🔹 Advantages of Java RMI
+
+- Object-oriented communication
+- Distributed computing support
+- Easy remote invocation
+- Secure communication
+
+--------------------------------------------------
+
+🔹 Applications
+
+- Banking systems
+- Hotel reservation systems
+- Distributed enterprise systems
+- Online ticket booking
+
+====================================================================================================
+
+6. ✅ Algorithm (Detailed)
+
+🔹 Step 1:
+Start the RMI server.
+
+--------------------------------------------------
+
+🔹 Step 2:
+Create remote object implementing booking methods.
+
+--------------------------------------------------
+
+🔹 Step 3:
+Create RMI registry on port 1099.
+
+--------------------------------------------------
+
+🔹 Step 4:
+Register remote object with registry using Naming.rebind().
+
+--------------------------------------------------
+
+🔹 Step 5:
+Start client application.
+
+--------------------------------------------------
+
+🔹 Step 6:
+Client searches remote object using Naming.lookup().
+
+--------------------------------------------------
+
+🔹 Step 7:
+Display menu options:
+1. Book Room
+2. Cancel Booking
+3. Exit
+
+--------------------------------------------------
+
+🔹 Step 8:
+If booking selected:
+- Read customer name
+- Read room number
+- Call remote bookRoom() method
+
+--------------------------------------------------
+
+🔹 Step 9:
+Server checks room availability.
+
+--------------------------------------------------
+
+🔹 Step 10:
+If room available:
+- Store booking
+- Return success message
+
+Else:
+- Return booking failed message
+
+--------------------------------------------------
+
+🔹 Step 11:
+If cancellation selected:
+- Read customer name
+- Call remote cancelBooking() method
+
+--------------------------------------------------
+
+🔹 Step 12:
+Server removes booking if found.
+
+--------------------------------------------------
+
+🔹 Step 13:
+Display result to client.
+
+--------------------------------------------------
+
+🔹 Step 14:
+Repeat until user exits.
+
+====================================================================================================
+
+7. ✅ Code Explanation
+
+🔹 REMOTE INTERFACE
+
+public interface HotelServiceInterface
+
+Defines remote methods.
+
+--------------------------------------------------
+
+Line:
+extends Remote
+
+Makes interface remotely accessible.
+
+--------------------------------------------------
+
+🔹 SERVER CLASS
+
+public class HotelServer extends UnicastRemoteObject
+
+Creates remote server object.
+
+--------------------------------------------------
+
+🔹 HASHMAP
+
+Map<Integer, String> bookings
+
+Stores room number and customer name.
+
+--------------------------------------------------
+
+🔹 BOOK ROOM METHOD
+
+bookRoom(...)
+
+Books room if available.
+
+--------------------------------------------------
+
+Line:
+bookings.put(roomNumber, guestName)
+
+Stores booking data.
+
+--------------------------------------------------
+
+🔹 CANCEL METHOD
+
+cancelBooking(...)
+
+Cancels customer booking.
+
+--------------------------------------------------
+
+🔹 REGISTRY CREATION
+
+LocateRegistry.createRegistry(1099)
+
+Creates RMI registry.
+
+--------------------------------------------------
+
+🔹 OBJECT REGISTRATION
+
+Naming.rebind(...)
+
+Registers remote object.
+
+--------------------------------------------------
+
+🔹 CLIENT LOOKUP
+
+Naming.lookup(...)
+
+Locates remote object.
+
+--------------------------------------------------
+
+🔹 MENU SYSTEM
+
+while(true)
+
+Runs booking menu continuously.
+
+--------------------------------------------------
+
+🔹 SWITCH CASE
+
+switch(choice)
+
+Handles user operations.
+
+====================================================================================================
+
+✅ FINAL CONCLUSION
+
+In this practical, we successfully implemented a distributed Hotel Booking System using Java RMI where clients remotely invoked booking and cancellation methods on the server using remote object communication.
