@@ -1,0 +1,547 @@
+✅ PRACTICAL 5 — Genetic Algorithm with Neural Network Optimization
+
+📄 Topic:
+Optimization of Genetic Algorithm parameters in Hybrid Genetic Algorithm-Neural Network Modeling.
+
+====================================================================================================
+
+1. ✅ How to Run in Short
+
+🔹 Step 1 — Install required libraries
+
+pip install numpy scikit-learn
+
+Reason:
+Required for numerical operations and neural network implementation.
+
+--------------------------------------------------
+
+🔹 Step 2 — Open terminal in project folder
+
+cd path_to_folder
+
+Reason:
+To access Python file from terminal.
+
+--------------------------------------------------
+
+🔹 Step 3 — Run Python file
+
+python genetic_algo.py
+
+Reason:
+Executes Genetic Algorithm and Neural Network optimization.
+
+--------------------------------------------------
+
+🔹 Step 4 — Observe output
+
+Reason:
+Displays optimized neural network parameters and minimum error.
+
+====================================================================================================
+
+2. ✅ Reason for the Code (Why Each Important Line is Written)
+
+🔹 IMPORT NUMPY
+
+Line:
+import numpy as np
+
+Reason:
+Used for numerical array operations.
+
+--------------------------------------------------
+
+🔹 IMPORT RANDOM
+
+Line:
+import random
+
+Reason:
+Used for random chromosome generation, mutation, and crossover.
+
+--------------------------------------------------
+
+🔹 IMPORT MLPRegressor
+
+Line:
+from sklearn.neural_network import MLPRegressor
+
+Reason:
+Used to create Artificial Neural Network model.
+
+--------------------------------------------------
+
+🔹 IMPORT MSE
+
+Line:
+from sklearn.metrics import mean_squared_error
+
+Reason:
+Used to evaluate prediction error.
+
+--------------------------------------------------
+
+🔹 DATASET
+
+Line:
+X = np.array(...)
+
+Reason:
+Stores spray drying input parameters.
+
+--------------------------------------------------
+
+Line:
+Y = np.array(...)
+
+Reason:
+Stores output moisture content values.
+
+--------------------------------------------------
+
+🔹 TRAIN TEST SPLIT
+
+Line:
+train_test_split(...)
+
+Reason:
+Splits data into training and testing datasets.
+
+--------------------------------------------------
+
+🔹 CHROMOSOME
+
+Line:
+[hidden_neurons, learning_rate]
+
+Reason:
+Represents neural network parameters to optimize.
+
+--------------------------------------------------
+
+🔹 FITNESS FUNCTION
+
+Line:
+def fitness(chromosome):
+
+Reason:
+Evaluates quality of chromosome.
+
+--------------------------------------------------
+
+🔹 NEURAL NETWORK MODEL
+
+Line:
+MLPRegressor(...)
+
+Reason:
+Creates neural network for prediction.
+
+--------------------------------------------------
+
+🔹 MEAN SQUARED ERROR
+
+Line:
+mean_squared_error(...)
+
+Reason:
+Measures prediction error.
+
+--------------------------------------------------
+
+🔹 SELECTION
+
+Line:
+population[:2]
+
+Reason:
+Selects best chromosomes.
+
+--------------------------------------------------
+
+🔹 CROSSOVER
+
+Line:
+child_lr = (parent1[1] + parent2[1]) / 2
+
+Reason:
+Combines parent genes to create child.
+
+--------------------------------------------------
+
+🔹 MUTATION
+
+Line:
+chromosome[0] += random.randint(-2, 2)
+
+Reason:
+Introduces variation to avoid local optimum.
+
+--------------------------------------------------
+
+🔹 GENERATIONS
+
+Line:
+for generation in range(GENERATIONS):
+
+Reason:
+Runs optimization repeatedly for improvement.
+
+====================================================================================================
+
+3. ✅ Viva Questions with Short Answers
+
+Q1. What is Genetic Algorithm?
+Genetic Algorithm is an optimization technique inspired by natural selection.
+
+--------------------------------------------------
+
+Q2. What is chromosome in GA?
+Chromosome represents a candidate solution.
+
+--------------------------------------------------
+
+Q3. What is fitness function?
+Function used to evaluate solution quality.
+
+--------------------------------------------------
+
+Q4. What is crossover?
+Process of combining parent solutions.
+
+--------------------------------------------------
+
+Q5. What is mutation?
+Random modification in chromosome.
+
+--------------------------------------------------
+
+Q6. Why mutation is important?
+Prevents premature convergence and adds diversity.
+
+--------------------------------------------------
+
+Q7. What is population in GA?
+Collection of candidate solutions.
+
+--------------------------------------------------
+
+Q8. What is Neural Network?
+Computational model inspired by human brain.
+
+--------------------------------------------------
+
+Q9. What is MSE?
+Mean Squared Error measures prediction error.
+
+--------------------------------------------------
+
+Q10. Why combine GA with Neural Network?
+GA optimizes neural network parameters for better accuracy.
+
+====================================================================================================
+
+4. ✅ Practical Explanation in Detail
+
+🔹 Introduction
+
+This practical demonstrates optimization of Neural Network parameters using Genetic Algorithm.
+
+The system combines:
+- Genetic Algorithm (GA)
+- Artificial Neural Network (ANN)
+
+to improve prediction performance.
+
+--------------------------------------------------
+
+🔹 Genetic Algorithm (GA)
+
+Genetic Algorithm is inspired by Darwin’s theory of natural evolution.
+
+It works using:
+- Selection
+- Crossover
+- Mutation
+
+to find best solution.
+
+--------------------------------------------------
+
+🔹 Working of Genetic Algorithm
+
+1. Generate random population
+2. Evaluate fitness
+3. Select best chromosomes
+4. Apply crossover
+5. Apply mutation
+6. Create new generation
+7. Repeat until optimal solution is found
+
+--------------------------------------------------
+
+🔹 Important Components of GA
+
+1. Population
+Set of candidate solutions.
+
+2. Chromosome
+Represents one solution.
+
+3. Fitness Function
+Evaluates solution quality.
+
+4. Selection
+Chooses best chromosomes.
+
+5. Crossover
+Combines parent genes.
+
+6. Mutation
+Introduces random variation.
+
+--------------------------------------------------
+
+🔹 Neural Network (ANN)
+
+Artificial Neural Network is a machine learning model inspired by biological neurons.
+
+It contains:
+- Input layer
+- Hidden layer
+- Output layer
+
+--------------------------------------------------
+
+🔹 Hybrid GA-NN Model
+
+In this practical:
+- GA optimizes ANN parameters
+- ANN predicts moisture content
+
+Optimized parameters:
+- Hidden neurons
+- Learning rate
+
+--------------------------------------------------
+
+🔹 Dataset
+
+Input Parameters:
+- Temperature
+- Feed Flow Rate
+
+Output:
+- Moisture Content
+
+--------------------------------------------------
+
+🔹 Fitness Function
+
+Fitness is evaluated using Mean Squared Error (MSE).
+
+Formula:
+
+MSE = (1/n) Σ(actual - predicted)^2
+
+Lower MSE indicates better performance.
+
+--------------------------------------------------
+
+🔹 Selection Process
+
+Best chromosomes are selected based on lowest MSE.
+
+--------------------------------------------------
+
+🔹 Crossover Process
+
+Genes from two parents are combined to create child chromosome.
+
+--------------------------------------------------
+
+🔹 Mutation Process
+
+Random changes are introduced in chromosomes to improve diversity.
+
+--------------------------------------------------
+
+🔹 Generations
+
+Optimization process repeats over multiple generations to improve solution quality.
+
+--------------------------------------------------
+
+🔹 Advantages of Genetic Algorithm
+
+- Solves complex optimization problems
+- Avoids local optimum
+- Handles large search spaces
+- Works without derivative information
+
+--------------------------------------------------
+
+🔹 Applications
+
+- Machine Learning
+- Optimization problems
+- Robotics
+- Scheduling
+- Industrial process optimization
+
+====================================================================================================
+
+5. ✅ Code Explanation
+
+🔹 IMPORT LIBRARIES
+
+import numpy as np
+
+Used for numerical operations.
+
+--------------------------------------------------
+
+import random
+
+Used for random chromosome operations.
+
+--------------------------------------------------
+
+import MLPRegressor
+
+Used for Neural Network implementation.
+
+--------------------------------------------------
+
+🔹 DATASET
+
+X = np.array(...)
+
+Stores input parameters.
+
+--------------------------------------------------
+
+Y = np.array(...)
+
+Stores target values.
+
+--------------------------------------------------
+
+🔹 TRAIN TEST SPLIT
+
+train_test_split(...)
+
+Divides dataset into training and testing sets.
+
+--------------------------------------------------
+
+🔹 CREATE CHROMOSOME
+
+def create_chromosome():
+
+Creates random neural network parameters.
+
+--------------------------------------------------
+
+Line:
+hidden_neurons = random.randint(2, 20)
+
+Random hidden layer size.
+
+--------------------------------------------------
+
+Line:
+learning_rate = random.uniform(0.001, 0.1)
+
+Random learning rate.
+
+--------------------------------------------------
+
+🔹 FITNESS FUNCTION
+
+def fitness(chromosome):
+
+Evaluates chromosome quality.
+
+--------------------------------------------------
+
+Line:
+MLPRegressor(...)
+
+Creates ANN model.
+
+--------------------------------------------------
+
+Line:
+model.fit(X_train, Y_train)
+
+Trains neural network.
+
+--------------------------------------------------
+
+Line:
+predictions = model.predict(X_test)
+
+Predicts test outputs.
+
+--------------------------------------------------
+
+Line:
+mean_squared_error(...)
+
+Calculates prediction error.
+
+--------------------------------------------------
+
+🔹 SELECTION FUNCTION
+
+def selection(population):
+
+Chooses best chromosomes.
+
+--------------------------------------------------
+
+🔹 CROSSOVER FUNCTION
+
+def crossover(parent1, parent2):
+
+Combines parent genes.
+
+--------------------------------------------------
+
+🔹 MUTATION FUNCTION
+
+def mutation(chromosome):
+
+Introduces random changes.
+
+--------------------------------------------------
+
+🔹 GENETIC ALGORITHM FUNCTION
+
+def genetic_algorithm():
+
+Controls entire optimization process.
+
+--------------------------------------------------
+
+Line:
+for generation in range(GENERATIONS):
+
+Runs optimization repeatedly.
+
+--------------------------------------------------
+
+🔹 MAIN PROGRAM
+
+best_solution, best_error = genetic_algorithm()
+
+Executes optimization and displays results.
+
+====================================================================================================
+
+✅ FINAL CONCLUSION
+
+In this practical, we successfully implemented a Hybrid Genetic Algorithm-Neural Network model where Genetic Algorithm optimized Neural Network parameters such as hidden neurons and learning rate to minimize prediction error effectively.
