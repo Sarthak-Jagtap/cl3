@@ -1,0 +1,395 @@
+✅ PRACTICAL 3 — Fuzzy Set Operations
+
+📄 Topic:
+Implement Union, Intersection, Complement, Difference operations on fuzzy sets.
+Also create fuzzy relations using Cartesian Product and perform Max-Min Composition.
+
+====================================================================================================
+
+1. ✅ How to Run in Short
+
+🔹 Step 1 — Open terminal in project folder
+
+cd path_to_folder
+
+Reason:
+To access Python file from terminal.
+
+--------------------------------------------------
+
+🔹 Step 2 — Run Python file
+
+python fuzzy_set_operations.py
+
+Reason:
+Executes fuzzy set operations and displays results.
+
+--------------------------------------------------
+
+🔹 Step 3 — Observe output
+
+Reason:
+Displays union, intersection, complement, difference, fuzzy relations, and max-min composition.
+
+====================================================================================================
+
+2. ✅ Reason for the Code (Why Each Important Line is Written)
+
+🔹 FUZZY UNION
+
+Line:
+max(A[key], B[key])
+
+Reason:
+Union operation in fuzzy logic takes maximum membership value.
+
+--------------------------------------------------
+
+🔹 FUZZY INTERSECTION
+
+Line:
+min(A[key], B[key])
+
+Reason:
+Intersection operation takes minimum membership value.
+
+--------------------------------------------------
+
+🔹 FUZZY COMPLEMENT
+
+Line:
+1 - A[key]
+
+Reason:
+Complement operation subtracts membership value from 1.
+
+--------------------------------------------------
+
+🔹 FUZZY DIFFERENCE
+
+Line:
+min(A[key], 1 - B[key])
+
+Reason:
+Difference operation calculates A - B using complement of B.
+
+--------------------------------------------------
+
+🔹 CARTESIAN PRODUCT
+
+Line:
+relation[(a, b)] = min(A[a], B[b])
+
+Reason:
+Creates fuzzy relation using minimum membership values.
+
+--------------------------------------------------
+
+🔹 MAX-MIN COMPOSITION
+
+Line:
+values.append(min(R[(x, y)], S[(y, z)]))
+
+Reason:
+Calculates minimum value between relations.
+
+--------------------------------------------------
+
+Line:
+result[(x, z)] = max(values)
+
+Reason:
+Selects maximum among minimum values.
+
+--------------------------------------------------
+
+🔹 FUZZY SETS
+
+Line:
+A = {'x1': 0.2, ...}
+
+Reason:
+Defines membership values of fuzzy set.
+
+====================================================================================================
+
+3. ✅ Viva Questions with Short Answers
+
+Q1. What is fuzzy set?
+A fuzzy set allows partial membership values between 0 and 1.
+
+--------------------------------------------------
+
+Q2. Difference between crisp and fuzzy set?
+Crisp sets have only 0 or 1 membership, fuzzy sets have values between 0 and 1.
+
+--------------------------------------------------
+
+Q3. What is membership function?
+Function representing degree of membership of elements.
+
+--------------------------------------------------
+
+Q4. What is fuzzy union?
+Operation that takes maximum membership values.
+
+--------------------------------------------------
+
+Q5. What is fuzzy intersection?
+Operation that takes minimum membership values.
+
+--------------------------------------------------
+
+Q6. What is complement of fuzzy set?
+Complement is calculated using 1 - membership value.
+
+--------------------------------------------------
+
+Q7. What is fuzzy relation?
+Relation between fuzzy sets using Cartesian product.
+
+--------------------------------------------------
+
+Q8. What is Cartesian product?
+Combination of elements from two fuzzy sets.
+
+--------------------------------------------------
+
+Q9. What is Max-Min Composition?
+Composition using maximum of minimum values.
+
+--------------------------------------------------
+
+Q10. Applications of fuzzy logic?
+Control systems, AI, washing machines, decision systems.
+
+====================================================================================================
+
+4. ✅ Practical Explanation in Detail
+
+🔹 Introduction
+
+This practical demonstrates operations on fuzzy sets and fuzzy relations.
+
+Unlike classical sets, fuzzy sets allow partial membership values between 0 and 1.
+
+--------------------------------------------------
+
+🔹 Fuzzy Set Concept
+
+A fuzzy set is represented using membership values.
+
+Example:
+
+A = {x1:0.2, x2:0.7, x3:1.0}
+
+Here:
+- x1 belongs to set with degree 0.2
+- x2 belongs with degree 0.7
+- x3 fully belongs with degree 1.0
+
+--------------------------------------------------
+
+🔹 Union Operation
+
+Union combines two fuzzy sets using maximum membership values.
+
+Formula:
+
+μ(A ∪ B) = max(μA(x), μB(x))
+
+--------------------------------------------------
+
+🔹 Intersection Operation
+
+Intersection uses minimum membership values.
+
+Formula:
+
+μ(A ∩ B) = min(μA(x), μB(x))
+
+--------------------------------------------------
+
+🔹 Complement Operation
+
+Complement represents opposite membership.
+
+Formula:
+
+μ(A') = 1 - μA(x)
+
+--------------------------------------------------
+
+🔹 Difference Operation
+
+Difference operation subtracts one fuzzy set from another.
+
+Formula:
+
+A - B = min(A, 1-B)
+
+--------------------------------------------------
+
+🔹 Fuzzy Relations
+
+Fuzzy relation is created using Cartesian Product.
+
+It combines elements from two fuzzy sets.
+
+--------------------------------------------------
+
+🔹 Cartesian Product
+
+Cartesian Product creates ordered pairs.
+
+Formula:
+
+R(x,y) = min(A(x), B(y))
+
+--------------------------------------------------
+
+🔹 Max-Min Composition
+
+Max-Min Composition combines fuzzy relations.
+
+Steps:
+1. Take minimum values row-wise.
+2. Take maximum values column-wise.
+
+--------------------------------------------------
+
+🔹 Advantages of Fuzzy Logic
+
+- Handles uncertainty
+- Supports approximate reasoning
+- Useful in intelligent systems
+- Human-like decision making
+
+--------------------------------------------------
+
+🔹 Applications
+
+- Washing machines
+- Air conditioners
+- Medical diagnosis
+- Traffic systems
+- AI systems
+
+====================================================================================================
+
+5. ✅ Code Explanation
+
+🔹 UNION FUNCTION
+
+def fuzzy_union(A, B):
+
+Calculates union of fuzzy sets.
+
+--------------------------------------------------
+
+Line:
+result[key] = max(A[key], B[key])
+
+Selects maximum membership value.
+
+--------------------------------------------------
+
+🔹 INTERSECTION FUNCTION
+
+def fuzzy_intersection(A, B):
+
+Calculates intersection.
+
+--------------------------------------------------
+
+Line:
+min(A[key], B[key])
+
+Selects minimum membership value.
+
+--------------------------------------------------
+
+🔹 COMPLEMENT FUNCTION
+
+def fuzzy_complement(A):
+
+Calculates complement.
+
+--------------------------------------------------
+
+Line:
+1 - A[key]
+
+Subtracts membership from 1.
+
+--------------------------------------------------
+
+🔹 DIFFERENCE FUNCTION
+
+def fuzzy_difference(A, B):
+
+Calculates difference A - B.
+
+--------------------------------------------------
+
+Line:
+min(A[key], 1 - B[key])
+
+Uses complement of B.
+
+--------------------------------------------------
+
+🔹 CARTESIAN PRODUCT FUNCTION
+
+def cartesian_product(A, B):
+
+Creates fuzzy relation.
+
+--------------------------------------------------
+
+Line:
+relation[(a, b)] = min(A[a], B[b])
+
+Creates ordered pairs using minimum values.
+
+--------------------------------------------------
+
+🔹 MAX-MIN COMPOSITION FUNCTION
+
+def max_min_composition(...)
+
+Performs relation composition.
+
+--------------------------------------------------
+
+Line:
+values.append(min(...))
+
+Computes minimum values.
+
+--------------------------------------------------
+
+Line:
+result[(x, z)] = max(values)
+
+Selects maximum among minimums.
+
+--------------------------------------------------
+
+🔹 MAIN PROGRAM
+
+Defines fuzzy sets and calls all operations.
+
+Displays:
+- Union
+- Intersection
+- Complement
+- Difference
+- Cartesian Product
+- Max-Min Composition
+
+====================================================================================================
+
+✅ FINAL CONCLUSION
+
+In this practical, we successfully implemented fuzzy set operations including union, intersection, complement, and difference. We also created fuzzy relations using Cartesian product and performed max-min composition on fuzzy relations.
