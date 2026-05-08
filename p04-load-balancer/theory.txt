@@ -1,0 +1,369 @@
+✅ PRACTICAL 4 — Load Balancing Algorithms
+
+📄 Topic:
+Implement load balancing algorithms to distribute client requests among multiple servers.
+
+====================================================================================================
+
+1. ✅ How to Run in Short
+
+🔹 Step 1 — Open terminal in project folder
+
+cd path_to_folder
+
+Reason:
+To access the Python file from terminal.
+
+--------------------------------------------------
+
+🔹 Step 2 — Run Python file
+
+python load_balancer.py
+
+Reason:
+Executes load balancing simulation among multiple servers.
+
+--------------------------------------------------
+
+🔹 Step 3 — Observe output
+
+Reason:
+Displays how requests are distributed using Round Robin, Random, and Hashing algorithms.
+
+====================================================================================================
+
+2. ✅ Reason for the Code (Why Each Important Line is Written)
+
+🔹 IMPORT RANDOM MODULE
+
+Line:
+import random
+
+Reason:
+Used for random server selection algorithm.
+
+--------------------------------------------------
+
+🔹 CONSTRUCTOR
+
+Line:
+def __init__(self, servers):
+
+Reason:
+Initializes server list and starting index.
+
+--------------------------------------------------
+
+🔹 ROUND ROBIN
+
+Line:
+server = self.servers[self.index]
+
+Reason:
+Selects current server sequentially.
+
+--------------------------------------------------
+
+Line:
+self.index = (self.index + 1) % len(self.servers)
+
+Reason:
+Moves to next server and loops back after last server.
+
+--------------------------------------------------
+
+🔹 RANDOM SELECTION
+
+Line:
+random.choice(self.servers)
+
+Reason:
+Randomly selects one server from list.
+
+--------------------------------------------------
+
+🔹 HASHING
+
+Line:
+request_id % len(self.servers)
+
+Reason:
+Maps request ID to a server using modulo operation.
+
+--------------------------------------------------
+
+🔹 SIMULATE REQUESTS
+
+Line:
+for i in range(num_requests):
+
+Reason:
+Simulates multiple client requests.
+
+--------------------------------------------------
+
+🔹 MAIN BLOCK
+
+Line:
+servers = ["Server A", "Server B", "Server C"]
+
+Reason:
+Defines available servers for load balancing.
+
+====================================================================================================
+
+3. ✅ Viva Questions with Short Answers
+
+Q1. What is load balancing?
+Load balancing distributes requests among multiple servers.
+
+--------------------------------------------------
+
+Q2. Why load balancing is needed?
+To avoid server overload and improve performance.
+
+--------------------------------------------------
+
+Q3. What is Round Robin algorithm?
+Requests are distributed sequentially among servers.
+
+--------------------------------------------------
+
+Q4. What is Random load balancing?
+Server is selected randomly for each request.
+
+--------------------------------------------------
+
+Q5. What is Hashing in load balancing?
+Requests are mapped to servers using hash/modulo function.
+
+--------------------------------------------------
+
+Q6. What is server overload?
+Condition when server receives too many requests.
+
+--------------------------------------------------
+
+Q7. Advantages of load balancing?
+Improved performance, scalability, and reliability.
+
+--------------------------------------------------
+
+Q8. What is scalability?
+Ability to handle increasing workload.
+
+--------------------------------------------------
+
+Q9. Real-life applications of load balancing?
+Google, Netflix, cloud computing systems.
+
+--------------------------------------------------
+
+Q10. Which algorithm is simplest?
+Round Robin algorithm.
+
+====================================================================================================
+
+4. ✅ Practical Explanation in Detail
+
+🔹 Introduction
+
+This practical demonstrates implementation of load balancing algorithms used in distributed systems.
+
+Load balancing helps distribute incoming client requests across multiple servers efficiently.
+
+--------------------------------------------------
+
+🔹 Need for Load Balancing
+
+If all requests go to one server:
+- Server becomes overloaded
+- Performance decreases
+- System may crash
+
+Load balancing solves this problem by distributing workload evenly.
+
+--------------------------------------------------
+
+🔹 Load Balancer
+
+A load balancer acts as an intermediary between:
+- Clients
+- Multiple servers
+
+It decides which server should handle each request.
+
+--------------------------------------------------
+
+🔹 Round Robin Algorithm
+
+Round Robin distributes requests one-by-one in circular order.
+
+Example:
+
+Request 1 → Server A
+Request 2 → Server B
+Request 3 → Server C
+Request 4 → Server A
+
+Advantages:
+- Simple
+- Fair distribution
+
+--------------------------------------------------
+
+🔹 Random Load Balancing
+
+Random algorithm selects server randomly.
+
+Advantages:
+- Easy implementation
+- Randomized distribution
+
+Disadvantages:
+- Uneven load possible
+
+--------------------------------------------------
+
+🔹 Hashing Algorithm
+
+Hashing uses request ID to determine server.
+
+Formula:
+
+Server = RequestID % NumberOfServers
+
+Advantages:
+- Consistent mapping
+- Useful for caching
+
+--------------------------------------------------
+
+🔹 Simulation of Requests
+
+The program simulates multiple requests and applies all algorithms to show server allocation.
+
+--------------------------------------------------
+
+🔹 Advantages of Load Balancing
+
+- Better performance
+- High availability
+- Fault tolerance
+- Efficient resource utilization
+
+--------------------------------------------------
+
+🔹 Applications
+
+- Cloud computing
+- Web servers
+- Banking systems
+- E-commerce websites
+
+====================================================================================================
+
+5. ✅ Code Explanation
+
+🔹 IMPORT MODULE
+
+import random
+
+Used for random server selection.
+
+--------------------------------------------------
+
+🔹 LOAD BALANCER CLASS
+
+class LoadBalancer:
+
+Creates load balancing system.
+
+--------------------------------------------------
+
+🔹 CONSTRUCTOR
+
+def __init__(self, servers):
+
+Initializes:
+- server list
+- current index
+
+--------------------------------------------------
+
+🔹 ROUND ROBIN METHOD
+
+def round_robin(self):
+
+Selects servers sequentially.
+
+--------------------------------------------------
+
+Line:
+self.index = (self.index + 1) % len(self.servers)
+
+Moves to next server cyclically.
+
+--------------------------------------------------
+
+🔹 RANDOM METHOD
+
+def random_selection(self):
+
+Randomly selects server.
+
+--------------------------------------------------
+
+Line:
+random.choice(self.servers)
+
+Chooses random server from list.
+
+--------------------------------------------------
+
+🔹 HASHING METHOD
+
+def hashing(self, request_id):
+
+Maps requests to server using modulo.
+
+--------------------------------------------------
+
+Line:
+request_id % len(self.servers)
+
+Calculates server index.
+
+--------------------------------------------------
+
+🔹 SIMULATE REQUESTS FUNCTION
+
+def simulate_requests(lb, num_requests):
+
+Simulates multiple client requests.
+
+--------------------------------------------------
+
+Line:
+for i in range(num_requests):
+
+Processes requests one by one.
+
+--------------------------------------------------
+
+🔹 MAIN PROGRAM
+
+Defines server list and creates LoadBalancer object.
+
+--------------------------------------------------
+
+Line:
+simulate_requests(lb, 7)
+
+Runs simulation for 7 requests.
+
+====================================================================================================
+
+✅ FINAL CONCLUSION
+
+In this practical, we successfully implemented different load balancing algorithms including Round Robin, Random Selection, and Hashing to distribute client requests among multiple servers efficiently.
